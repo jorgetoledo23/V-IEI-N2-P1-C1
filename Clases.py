@@ -1,3 +1,6 @@
+import os
+
+
 class Botella:
     capacidadMaxima = None
     color = None
@@ -35,13 +38,13 @@ class Auto:
 
         #Encapsular
         self.__patente = str(pat).upper()
-        self.nchasis = str(nchas).lower()
-        self.marca = marca
-        self.modelo = modelo
+        self.__nchasis = str(nchas).lower()
+        self.__marca = marca
+        self.__modelo = modelo
         self.__color = color
-        self.tipoCombustible = tipoCombustible
-        self.tipoAuto = tipoAuto
-        self.kilometraje = km
+        self.__tipoCombustible = tipoCombustible
+        self.__tipoAuto = tipoAuto
+        self.__kilometraje = km
 
     def verPatente(self):
         return self.__patente
@@ -51,6 +54,9 @@ class Auto:
 
     def cambiarColor(self, color):
         self.__color = color
+
+    def GetInfo(self):
+        return f"Auto Patente: {self.__patente}, Marca: {self.__marca}, Modelo: {self.__modelo}, Color: {self.__color}, Tipo Auto: {self.__tipoAuto}"
 
 
 class Persona:
@@ -71,16 +77,19 @@ class Mecanico:
     def __init__(self, rut, nom, ape, edad):
         self.nombres = nom
         self.apellidos = ape,
-        self.edad = edad
+        self.edad = int(edad)
         self.rut = rut
 
-        if(edad >=18):
+        if(edad >= 18):
             self.mayorEdad = True
         else:
             self.mayorEdad = False
 
     def getNombreCompleto(self):
         return str(self.nombres) + " " + str(self.apellidos)
+
+    def GetInfo(self):
+        return f"Mecanico Rut: {self.rut}, Nombres: {self.nombres}, Apellidos: {self.apellidos}, Edad {self.edad}"
 
 class Reparacion:
 
@@ -90,8 +99,28 @@ class Reparacion:
         self.valor = costo
         self.repuestosUtilizados = repuestos
 
-    def getInfoReparacion(self):
+    def getInfo(self):
         return f"INFO REPARACION: AUTO PATENTE: {self.autoReparado.verPatente()} COLOR: {self.autoReparado.verColor() }, MECANICO ASIGNADO: {self.mecanicoAsignado.getNombreCompleto()} PRECIO REPARACION: {self.valor}"
 
     def cambiarColor(self, color):
         self.autoReparado.cambiarColor(color)
+
+
+class Menu:
+
+    def MostrarMenu():
+
+        print("-------------------------------SISTEMA DE REPARACIONES-----------------------")
+
+        print("Presione 1 para Agregar Automoviles")
+        print("Presione 2 para Agregar Mecanicos")
+        print("Presione 3 para Agregar Reparaciones")
+
+        print("Presione 4 para Ver los Vehiculos Ingresados")
+        print("Presione 5 para Ver los Mecanicos Ingresados")
+        print("Presione 6 para Ver las Reparaciones Ingresados")
+
+        print("Escriba Salir para Finalizar!")
+
+    def LimpiarConsola():
+        os.system("cls" if os.name =="nt" else "clear")

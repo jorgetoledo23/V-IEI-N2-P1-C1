@@ -99,7 +99,7 @@ class Reparacion:
         self.valor = costo
         self.repuestosUtilizados = repuestos
 
-    def getInfo(self):
+    def GetInfo(self):
         return f"INFO REPARACION: AUTO PATENTE: {self.autoReparado.verPatente()} COLOR: {self.autoReparado.verColor() }, MECANICO ASIGNADO: {self.mecanicoAsignado.getNombreCompleto()} PRECIO REPARACION: {self.valor}"
 
     def cambiarColor(self, color):

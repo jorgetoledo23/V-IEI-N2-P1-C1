@@ -1,5 +1,20 @@
 from Clases import *
 
+def insertarDatosTesting():
+    A = Auto('GHFG23','GTSFDRSF343434','ROJO', 'KIA','RIO 5', 2013)
+    A2 = Auto('WESD17','HSTDGDRSF34332','BLANCO', 'NISSAN','TERRANO', 2010)
+    A3 = Auto('HTDG22','IKYUHHFTDG2323','GRIS', 'MAZDA','CX 5', 2020)
+    listaAutos.append(A)
+    listaAutos.append(A2)
+    listaAutos.append(A3)
+
+    M = Mecanico('1.123.123-1','ALEXIS', 'SANCHEZ', 35, 'CURICO')
+    M2 = Mecanico('2.123.123-1','ARTURO', 'VIDAL', 30, 'MOLINA')
+    M3 = Mecanico('3.123.123-1','GARY', 'MEDEL', 40, 'TENO')
+    listaMecs.append(M)
+    listaMecs.append(M2)
+    listaMecs.append(M3)
+
 #Tabla para Autos
 listaAutos = []
 
@@ -9,12 +24,55 @@ listaMecs = []
 #Tabla para Reparaciones
 listaReps = []
 
+insertarDatosTesting()
+
 while True:
 
     Menu.LimpiarConsola()
     Menu.MostrarMenu()
 
     opcionSeleccionada = input(" : ")
+
+
+    if opcionSeleccionada == "7":
+        #Editar Auto
+        Menu.LimpiarConsola()
+
+        i = 1
+        for A in listaAutos:
+            print(f"Opcion {i}: {A.GetInfo()}")
+            i += 1
+
+        opcion = int(input("Seleccine el Numero del Auto a Editar: "))
+
+        listaAutos[opcion - 1].setPatente(input('Ingrese Nueva Patente: '))
+        listaAutos[opcion - 1].setNChasis(input('Ingrese Nuevo Numero de Chasis: '))
+        #Casting
+        listaAutos[opcion-1].setColor(input('Ingrese Nuevo Color: '))
+        listaAutos[opcion-1].setMarca(input('Ingrese Nueva Marca: '))
+        listaAutos[opcion-1].setModelo(input('Ingrese Nuevo Modelo: '))
+        listaAutos[opcion-1].setYear(input('Ingrese Nuevo Año: '))
+        
+        print(" ")
+        print("Auto Editado Exitosamente. Presione Enter para Continuar...")
+
+    if opcionSeleccionada == "8":
+        Menu.LimpiarConsola()
+
+        #VALIDAR QUE EL AUTO A ELIMINAR NO ESTE EN UNA REPARACION
+
+        i = 1
+        for A in listaAutos:
+            print(f"Opcion {i}: {A.GetInfo()}")
+            i += 1
+
+        opcion = int(input("Seleccine el Numero del Auto a Eliminar: "))
+
+        listaAutos.remove(listaAutos[opcion -1])
+
+        print(" ")
+        print("Auto Eliminado Exitosamente. Presione Enter para Continuar...")
+
 
     if opcionSeleccionada == "1":
         #Logica para Insertar Vehiculos   
@@ -27,12 +85,9 @@ while True:
         modelo = input("Ingrese Modelo: ")
         color = input("Ingrese Color: ")
         year = input("Ingrese Año: ")
-        tAuto = input("Ingrese Tipo de Auto: ")
-        tComb = input("Ingrese Tipo Combustible: ")
-        km = input("Ingrese Kilometraje: ")
 
         #Crear Objeto / Instacia
-        A = Auto(pat,nchas,marca,modelo,color,tComb,tAuto,km)
+        A = Auto(pat,nchas,color,marca,modelo,year)
         
         #Insertar en la Base de Datos
         listaAutos.append(A)
@@ -47,9 +102,10 @@ while True:
         nom = input("Ingrese Nombres: ")
         ape = input("Ingrese Apellidos: ")
         edad = int(input("Ingrese Edad: "))
+        dir = input('Ingrese Direccion:')
 
         #Crear el Objeto / Instancia
-        Mec = Mecanico(rut, nom, ape, edad)
+        Mec = Mecanico(rut, nom, ape, edad, dir)
 
         #Insertar en la Base de Datos / Lista
         listaMecs.append(Mec)
@@ -95,7 +151,6 @@ while True:
             print("No puedes agregar Reparaciones sin Autos/Mecanicos Ingresados!")
             print(" ")
             input("Presiona Enter para Continuar...")
-
 
     if opcionSeleccionada == "4":
         Menu.LimpiarConsola()
